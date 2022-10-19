@@ -1,0 +1,104 @@
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+    @media (min-width: 768pxpx) {
+        max-width: 750px;
+    }
+    @media (min-width: 1024px) {
+        max-width: 992px;
+    }
+    @media (min-width: 1200px) {
+        max-width: 1170px;
+    }
+    @media (min-width: 1366px) {
+        max-width: 1200px;
+    }
+    @media (min-width: 1600px) {
+        max-width: 1440px;
+    }
+}
+
+// flex
+.flex {
+    display: flex;
+
+    // Direction
+    &.column {
+        flex-direction: column;
+    }
+    &.column-reverse {
+        flex-direction: column-reverse;
+    }
+
+    &.row {
+        flex-direction: row;
+    }
+    &.row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    // Align
+    &.align-center {
+        align-items: center;
+    }
+    &.align-start {
+        align-items: flex-start;
+    }
+    &.align-end {
+        align-items: flex-end;
+    }
+    &.align-stretch {
+        align-items: stretch;
+    }
+
+    // Justify
+    &.justify-center {
+        justify-content: center;
+    }
+    &.justify-start {
+        justify-content: flex-start;
+    }
+    &.justify-end {
+        justify-content: flex-end;
+    }
+    &.justify-between {
+        justify-content: space-between;
+    }
+    &.justify-stretch {
+        justify-content: stretch;
+    }
+}
+
+// Backgrounds
+.bg-main {
+    background: var(--main-color);
+}
+.bg-dark-main {
+    background: var(--dark-main-color);
+}
+.bg-auqua {
+    background: var(--aqua-color);
+}
+
+// Colors
+.colored {
+    color: var(--main-color);
+}
+.n0 {
+    color: var(--n0-color);
+}
+.n3 {
+    color: var(--dark-color);
+}
+.n5 {
+    color: var(--n5-color);
+}
+.n6 {
+    color: var(--n6-color);
+}
+.n7 {
+    color: var(--n7-color);
+}
+
+

@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+@import "./styles/fonts.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--n0-color);
+  font-family: "Gilroy", sans-serif;
+  scroll-behavior: smooth;
+}
+
+ul,
+ol,
+menu {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: medium;
+  font-weight: 400;
+  font-size: 72px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+}
+@media (max-width: 1023px) {
+  h1 {
+    font-size: 64px;
+  }
+}
+@media (max-width: 767px) {
+  h1 {
+    font-size: 48px;
+  }
+}
+
+h2 {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: normal;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 100%;
+  text-align: center;
+  color: #333333;
+}
+@media (max-width: 1023px) {
+  h2 {
+    font-size: 48px;
+  }
+}
+@media (max-width: 767px) {
+  h2 {
+    font-size: 36px;
+  }
+}
+
+h3 {
+  font-family: "Gilroy";
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 100%;
+  /* identical to box height, or 30px */
+}
+
+h4 {
+  font-family: "Gilroy";
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+h5 {
+  font-family: "Gilroy";
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.05em;
+}
+
+p {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  color: var(--n3-color);
+}
+@media (max-width: 1599px) {
+  p {
+    font-size: 18px;
+  }
+}
+p.lg {
+  font-size: 22px;
+  font-family: "Gilroy-Regular";
+}
+p.sm {
+  font-size: 16px;
+  line-height: 140%;
+}
+
+.playfair {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+:root {
+  --main-color: #29a5da;
+  --n0-color: #000;
+  --n3-color: #333;
+  --n6-color: #666;
+  --n7-color: #777;
+  --n5-color: #555;
+  --dark-main-color: #004072;
+  --aqua-color: #eef8ff;
+}
+
+body {
+  margin: 0;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 500;
+  background-color: #f7f8f9;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 15px;
+  min-width: 1200px;
+  overflow: auto;
+}
+
+a {
+  color: #0f6181;
+  text-decoration: none;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #cccccc;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: 0px;
+}
+
+* {
+  scrollbar-width: none;
+  scrollbar-color: rgba(0, 0, 0, 0.199) rgba(235, 235, 235, 0.295);
+}
