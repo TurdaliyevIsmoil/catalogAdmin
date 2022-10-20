@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import API from "../../API";
 import { useDataContext } from "../../contexts/DataContext";
 import Button from "../UI/Button";
 
@@ -10,16 +11,14 @@ function News() {
   const [data, setdata] = useState([]);
   const { deleteNews, addNews } = useDataContext();
   useEffect(() => {
-    fetch("http://49.12.13.213:9090/api/v1/home-news/list?offset=0&limit=100")
+    fetch(API.news.getNewsS + "?offset=0&limit=100")
       .then((i) => i.json())
       .then((i) => setdata(i.data || []));
   }, []);
 
   const deleteHandler = async (n) => {
     await deleteNews(n);
-    await fetch(
-      "http://49.12.13.213:9090/api/v1/home-news/list?offset=0&limit=100"
-    )
+    await fetch(API.news.getNewsS + "?offset=0&limit=100")
       .then((i) => i.json())
       .then((i) => setdata(i.data || []));
   };
@@ -32,9 +31,7 @@ function News() {
       image: e.target.image.files[0],
     };
     await addNews(data);
-    await fetch(
-      "http://49.12.13.213:9090/api/v1/home-news/list?offset=0&limit=100"
-    )
+    await fetch(API.news.getNewsS + "?offset=0&limit=100")
       .then((i) => i.json())
       .then((i) => setdata(i.data || []));
   };

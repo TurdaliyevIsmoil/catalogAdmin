@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import API from "../../API";
 import { useDataContext } from "../../contexts/DataContext";
 import Button from "./../UI/Button";
 
@@ -10,18 +11,19 @@ const Subcatalog = () => {
   const params = useParams();
 
   useEffect(() => {
-    fetch("http://49.12.13.213:9090/api/v1/subcatalog/list")
+    fetch(API.subcatalogs.getCatalogs)
       .then((i) => i.json())
       .then(
         (i) =>
-          i && setdata(i.data.filter((i) => +i?.catalog_id === +params?.id) || [])
+          i &&
+          setdata(i.data.filter((i) => +i?.catalog_id === +params?.id) || [])
       );
   }, []);
 
   const addSubcatalog = async (e) => {
     e.preventDefault();
     await addSubCategory(e.target.input.value, params.id);
-    fetch("http://49.12.13.213:9090/api/v1/subcatalog/list")
+    fetch(API.subcatalogs.getCatalogs)
       .then((i) => i.json())
       .then(
         (i) =>
@@ -32,7 +34,7 @@ const Subcatalog = () => {
 
   const deleteSubCatalog = async (id) => {
     await deleteSubCategory(id);
-    fetch("http://49.12.13.213:9090/api/v1/subcatalog/list")
+    fetch(API.subcatalogs.getCatalogs)
       .then((i) => i.json())
       .then(
         (i) =>

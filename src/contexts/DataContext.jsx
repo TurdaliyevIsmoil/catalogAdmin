@@ -52,13 +52,13 @@ export const DataProvider = ({ children }) => {
   };
 
   const deleteProduct = async (id) => {
-    await fetch(
-      "http://49.12.13.213:9090/api/v1/product/delete?product-id=" + id,
-      { method: "DELETE", headers: { Authorization: state.token } }
-    );
+    await fetch(API.product.delete + id, {
+      method: "DELETE",
+      headers: { Authorization: state.token },
+    });
   };
   const deleteNews = async (id) => {
-    await fetch("http://49.12.13.213:9090/api/v1/home-news/delete?id=" + id, {
+    await fetch(API.news.delete + id, {
       method: "DELETE",
       headers: { Authorization: state.token },
     });
@@ -82,10 +82,7 @@ export const DataProvider = ({ children }) => {
       redirect: "follow",
     };
 
-    await fetch(
-      "http://49.12.13.213:9090/api/v1/catalog/create",
-      requestOptions
-    )
+    await fetch(API.catalogs.create, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -111,10 +108,7 @@ export const DataProvider = ({ children }) => {
       redirect: "follow",
     };
 
-    await fetch(
-      "http://49.12.13.213:9090/api/v1/subcatalog/create",
-      requestOptions
-    )
+    await fetch(API.subcatalogs.create, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -130,10 +124,7 @@ export const DataProvider = ({ children }) => {
       },
     };
 
-    await fetch(
-      "http://49.12.13.213:9090/api/v1/catalog/delete?id=" + id,
-      requestOptions
-    )
+    await fetch(API.catalogs.delete + id, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -149,10 +140,7 @@ export const DataProvider = ({ children }) => {
       },
     };
 
-    await fetch(
-      "http://49.12.13.213:9090/api/v1/subcatalog/delete?id=" + id,
-      requestOptions
-    )
+    await fetch(API.subcatalogs.delete + id, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -173,10 +161,7 @@ export const DataProvider = ({ children }) => {
       }),
     };
 
-    await fetch(
-      "http://49.12.13.213:9090/api/v1/catalog/delete?id=" + id,
-      requestOptions
-    )
+    await fetch(API.catalogs.delete + id, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -185,7 +170,7 @@ export const DataProvider = ({ children }) => {
   const addProduct = async (data) => {
     loadingStart();
     let post_id = null;
-    await fetch("http://49.12.13.213:9090/api/v1/product/create", {
+    await fetch(API.product.create, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -214,7 +199,7 @@ export const DataProvider = ({ children }) => {
   const addNews = async (data) => {
     loadingStart();
     let post_id = null;
-    await fetch("http://49.12.13.213:9090/api/v1/home-news/create", {
+    await fetch(API.news.create, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

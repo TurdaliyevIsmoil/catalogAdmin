@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import API from "../../API";
 import { useDataContext } from "../../contexts/DataContext";
 import Button from "../UI/Button";
 
@@ -10,10 +11,7 @@ const SubcatalogProducts = () => {
   const params = useParams();
   useEffect(() => {
     if (params.id) {
-      fetch(
-        "http://49.12.13.213:9090/api/v1/subcatalog/product?offset=0&limit=100&id=" +
-          params.id
-      )
+      fetch(API.subcatalogs.getProductst + params.id)
         .then((i) => i.json())
         .then((i) => setdata(i.data || []));
     }
@@ -21,10 +19,7 @@ const SubcatalogProducts = () => {
   const deleteHandler = async (n) => {
     await deleteProduct(n);
     if (params.id) {
-      fetch(
-        "http://49.12.13.213:9090/api/v1/subcatalog/product?offset=0&limit=100&id=" +
-          params.id
-      )
+      fetch(API.subcatalogs.getProductst + params.id)
         .then((i) => i.json())
         .then((i) => setdata(i.data || []));
     }
@@ -41,10 +36,7 @@ const SubcatalogProducts = () => {
       subCatalogId: params?.id,
     };
     await addProduct(data);
-    fetch(
-      "http://49.12.13.213:9090/api/v1/subcatalog/product?offset=0&limit=100&id=" +
-        params.id
-    )
+    fetch(API.subcatalogs.getProductst + params.id)
       .then((i) => i.json())
       .then((i) => setdata(i.data || []));
   };
