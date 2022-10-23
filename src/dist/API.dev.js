@@ -14,7 +14,7 @@ var _default = {
     create: "".concat(HTTP, "://").concat(mainPath, "/api/v1/home-news/create"),
     "delete": "".concat(HTTP, "://").concat(mainPath, "/api/v1/home-news/delete?id="),
     update: "".concat(HTTP, "://").concat(mainPath, "/api/v1/home-news/update"),
-    updateImage: "".concat(HTTP, "://").concat(mainPath, "/api/v1/home-news/upload-image"),
+    updateImage: "".concat(HTTP, "://").concat(mainPath, "/api/v1/home-news/upload-image?home-news-id="),
     getNews: "".concat(HTTP, "://").concat(mainPath, "/api/news/get"),
     getNewsS: "".concat(HTTP, "://").concat(mainPath, "/api/v1/home-news/list")
   },
@@ -39,7 +39,7 @@ var _default = {
     create: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/create"),
     "delete": "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/delete?product-id="),
     update: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/update"),
-    updateImage: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/upload-image"),
+    updateImage: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/upload-image?product-id="),
     getTable: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/get-product"),
     getTables: "".concat(HTTP, "://").concat(mainPath, "/tables/get")
   }

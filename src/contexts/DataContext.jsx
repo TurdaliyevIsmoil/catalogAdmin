@@ -189,11 +189,7 @@ export const DataProvider = ({ children }) => {
       .then((d) => d.json())
       .then((d) => (post_id = d.data))
       .catch((e) => console.log(e));
-    await ImgUploader(
-      data.image,
-      "http://49.12.13.213:9090/api/v1/product/upload-image?product-id=",
-      post_id
-    );
+    await ImgUploader(data.image, API.product.updateImage, post_id);
     fetchCatalogs();
   };
   const addNews = async (data) => {
@@ -215,7 +211,7 @@ export const DataProvider = ({ children }) => {
       .catch((e) => console.log(e));
     await ImgUploader(
       data.image,
-      "http://49.12.13.213:9090/api/v1/home-news/upload-image?home-news-id=",
+      API.news.updateImage,
       post_id
     );
     fetchCatalogs();
