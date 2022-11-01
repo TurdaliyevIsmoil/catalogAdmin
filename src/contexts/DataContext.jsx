@@ -167,7 +167,7 @@ export const DataProvider = ({ children }) => {
       .catch((error) => console.log("error", error));
     fetchCatalogs();
   };
-  const addProduct = async (data) => {
+  const addProduct = async (data, tId) => {
     loadingStart();
     let post_id = null;
     await fetch(API.product.create, {
@@ -190,6 +190,9 @@ export const DataProvider = ({ children }) => {
       .then((d) => (post_id = d.data))
       .catch((e) => console.log(e));
     await ImgUploader(data.image, API.product.updateImage, post_id);
+    await fetch(
+      `${API.template.connect}?product-id=${post_id}&template-id=${tId}`
+    );
     fetchCatalogs();
   };
   const addNews = async (data) => {
@@ -209,11 +212,7 @@ export const DataProvider = ({ children }) => {
       .then((d) => d.json())
       .then((d) => (post_id = d.data))
       .catch((e) => console.log(e));
-    await ImgUploader(
-      data.image,
-      API.news.updateImage,
-      post_id
-    );
+    await ImgUploader(data.image, API.news.updateImage, post_id);
     fetchCatalogs();
   };
   // const addTable = async (data) => {

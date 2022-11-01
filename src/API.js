@@ -37,4 +37,8 @@ export default {
     getTable: `${HTTP}://${mainPath}/api/v1/product/get-product`,
     getTables: `${HTTP}://${mainPath}/tables/get`,
   },
+  template: {
+    create: `${HTTP}://${mainPath}/api/v1/template/create`,
+    connect: `${HTTP}://${mainPath}/api/v1/product/template/create`,
+  },
 };

@@ -42,6 +42,10 @@ var _default = {
     updateImage: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/upload-image?product-id="),
     getTable: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/get-product"),
     getTables: "".concat(HTTP, "://").concat(mainPath, "/tables/get")
+  },
+  template: {
+    create: "".concat(HTTP, "://").concat(mainPath, "/api/v1/template/create"),
+    connect: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/template/create")
   }
 };
 exports["default"] = _default;
