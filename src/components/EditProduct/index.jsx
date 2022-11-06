@@ -57,6 +57,9 @@ const EditProduct = () => {
 
   const editProductHandler = async (e) => {
     e.preventDefault();
+    if (e.target.image.files[0] && e.target.image.files[0].size > 1047152) {
+      return alert("File is so large! You should change!");
+    }
     const newdata = {
       productId: data.productId,
       title: e.target.title.value,

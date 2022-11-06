@@ -27,6 +27,9 @@ const SubcatalogProducts = () => {
 
   const addProductHandler = async (e) => {
     e.preventDefault();
+    if (e.target.image.files[0] && e.target.image.files[0].size > 1047152) {
+      return alert("File is so large! Please choose other than this!");
+    }
     const data = {
       title: e.target.title.value,
       desc: e.target.desc.value,
@@ -153,18 +156,26 @@ const SubcatalogProducts = () => {
       <br />
       <form onSubmit={addProductHandler} className="">
         <div className="grid  grid-cols-4 gap-4">
-          <input type="file" className="p-4" name="image" />
-          <input type="text" className="p-4" placeholder="Title" name="title" />
+          <input type="file" className="p-4" name="image" required />
+          <input
+            type="text"
+            className="p-4"
+            placeholder="Title"
+            name="title"
+            required
+          />
           <input
             type="text"
             className="p-4"
             placeholder="Description"
             name="desc"
+            required
           />
           <input
             type="number"
             className="p-4"
             placeholder="Price (sum )"
+            required
             name="price"
           />
         </div>
