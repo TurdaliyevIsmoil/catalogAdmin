@@ -34,11 +34,13 @@ export default {
     delete: `${HTTP}://${mainPath}/api/v1/product/delete?product-id=`,
     update: `${HTTP}://${mainPath}/api/v1/product/update`,
     updateImage: `${HTTP}://${mainPath}/api/v1/product/upload-image?product-id=`,
-    getTable: `${HTTP}://${mainPath}/api/v1/product/get-product`,
+    getTable: `${HTTP}://${mainPath}/api/v1/product/get-product?product-id=`,
     getTables: `${HTTP}://${mainPath}/tables/get`,
+    getTemplate: `${HTTP}://${mainPath}/api/v1/product/template/get`,
   },
   template: {
     create: `${HTTP}://${mainPath}/api/v1/template/create`,
+    update: `${HTTP}://${mainPath}/api/v1/product/template/update`,
     connect: `${HTTP}://${mainPath}/api/v1/product/template/create`,
   },
 };

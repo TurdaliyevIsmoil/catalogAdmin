@@ -195,6 +195,38 @@ export const DataProvider = ({ children }) => {
     );
     fetchCatalogs();
   };
+  const editProduct = async (data, tId) => {
+    loadingStart();
+    let post_id = null;
+    await fetch(API.product.update, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${state.token}`,
+      },
+      body: JSON.stringify({
+        productDescriptions: data.desc,
+        productIsActive: true,
+        productId: data.productId,
+        productIsNew: true,
+        productIsTop: false,
+        productName: data.title,
+        productPrice: data.price,
+        subCatalogID: +data.subCatalogId,
+      }),
+    })
+      .then((d) => d.json())
+      .then((d) => (post_id = data.productId))
+      .catch((e) => console.log(e));
+    if (data.image)
+      await ImgUploader(data.image, API.product.updateImage, post_id);
+    await fetch(
+      `${API.template.update}?product-id=${data.productId}&template-id=${tId}`,
+      { method: "PUT" }
+    );
+    fetchCatalogs();
+    navigate(-1);
+  };
   const addNews = async (data) => {
     loadingStart();
     let post_id = null;
@@ -215,193 +247,6 @@ export const DataProvider = ({ children }) => {
     await ImgUploader(data.image, API.news.updateImage, post_id);
     fetchCatalogs();
   };
-  // const addTable = async (data) => {
-  //   loadingStart();
-  //   let post_id = null;
-  //   await fetch(API.table.create, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `bearer ${state.token}`,
-  //     },
-  //     body: JSON.stringify({
-  //       post_body: data.body,
-  //       post_body_ru: data.body_ru,
-  //       post_title: data.title,
-  //       post_title_ru: data.title_ru,
-  //       price: data.price,
-  //       duration: data.duration,
-  //       post_img_url: "",
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((response) => (post_id = response.data))
-  //     .catch((e) => console.log(e));
-  //   await ImgUploader(data.img, API.table.updateImage, post_id);
-  //   fetchTables();
-  //   navigate("/tables");
-  // };
-
-  // // PUT
-  // const updateNews = async (data) => {
-  //   loadingStart();
-  //   const data1 = {
-  //     post_body: data.body,
-  //     post_body_ru: data.body_ru,
-  //     post_title: data.title,
-  //     post_title_ru: data.title_ru,
-  //     post_img_url: "",
-  //   };
-  //   const data2 = {
-  //     post_body: data.body,
-  //     post_body_ru: data.body_ru,
-  //     post_title: data.title,
-  //     post_title_ru: data.title_ru,
-  //     post_img_url: "",
-  //     post_img_path: data.imgPath,
-  //   };
-  //   await fetch(API.news.update + data.id, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `bearer ${state.token}`,
-  //     },
-  //     body: JSON.stringify(data.img ? data1 : data2),
-  //   }).catch((e) => console.log(e));
-  //   if (data.img) {
-  //     await ImgUploader(data.img, API.news.updateImage, data.id);
-  //   }
-  //   fetchNews();
-  //   navigate("/news");
-  // };
-  // const updateService = async (data) => {
-  //   loadingStart();
-  //   const data1 = {
-  //     post_body: data.body,
-  //     post_body_ru: data.body_ru,
-  //     post_title: data.title,
-  //     post_title_ru: data.title_ru,
-  //     price: data.price,
-  //     post_date: data.post_date,
-  //     post_img_url: "",
-  //   };
-  //   const data2 = {
-  //     post_body: data.body,
-  //     post_body_ru: data.body_ru,
-  //     post_title: data.title,
-  //     post_title_ru: data.title_ru,
-  //     price: data.price,
-  //     post_date: data.post_date,
-  //     post_img_url: "",
-  //     post_img_path: data.imgPath,
-  //   };
-  //   await fetch(API.service.update + data.id, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `bearer ${state.token}`,
-  //     },
-  //     body: JSON.stringify(data.img ? data1 : data2),
-  //   }).catch((e) => console.log(e));
-  //   if (data.img) {
-  //     await ImgUploader(data.img, API.service.updateImage, data.id);
-  //   }
-  //   navigate("/services");
-  //   fetchServices();
-  // };
-  // const updateTable = async (data) => {
-  //   loadingStart();
-  //   const data1 = {
-  //     post_body: data.body,
-  //     post_body_ru: data.body_ru,
-  //     post_title: data.title,
-  //     post_title_ru: data.title_ru,
-  //     price: data.price,
-  //     post_date: data.post_date,
-  //     date: data.date,
-  //     duration: data.duration,
-  //     format: data.format,
-  //     post_img_url: "",
-  //   };
-  //   const data2 = {
-  //     post_body: data.body,
-  //     post_body_ru: data.body_ru,
-  //     post_title: data.title,
-  //     post_title_ru: data.title_ru,
-  //     price: data.price,
-  //     post_date: data.post_date,
-  //     date: data.date,
-  //     duration: data.duration,
-  //     format: data.format,
-  //     post_img_url: "",
-  //     post_img_path: data.imgPath,
-  //   };
-  //   await fetch(API.table.update + data.id, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `bearer ${state.token}`,
-  //     },
-  //     body: JSON.stringify(data.img ? data1 : data2),
-  //   }).catch((e) => console.log(e));
-  //   if (data.img) {
-  //     await ImgUploader(data.img, API.table.updateImage, data.id);
-  //   }
-  //   fetchTables();
-  //   navigate("/tables");
-  // };
-
-  // // Deletes
-  // const deleteNews = (id) => {
-  //   loadingStart();
-  //   fetch(API.news.delete + id, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `bearer ${state.token}`,
-  //     },
-  //   })
-  //     .then((e) => (e.ok ? e.json() : Error("Something went wrong")))
-  //     .then((d) => {
-  //       navigate("/news");
-  //       fetchNews();
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
-  // const deleteService = (id) => {
-  //   loadingStart();
-  //   fetch(API.service.delete + id, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `bearer ${state.token}`,
-  //     },
-  //   })
-  //     .then((e) => (e.ok ? e.json() : Error("Something went wrong")))
-  //     .then((d) => {
-  //       fetchServices();
-  //       navigate("/services");
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
-  // const deleteTable = (id) => {
-  //   loadingStart();
-  //   fetch(API.table.delete + id, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `bearer ${state.token}`,
-  //     },
-  //   })
-  //     .then((e) => console.log(e))
-  //     .then((d) => {
-  //       navigate("/tables");
-  //       fetchTables();
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
-
-  // Helpers
   const ImgUploader = async (img, api, id) => {
     let myHeaders = new Headers();
     myHeaders.append("Authorization", `${state.token}`);
@@ -496,6 +341,7 @@ export const DataProvider = ({ children }) => {
         addProduct,
         addNews,
         deleteNews,
+        editProduct,
       }}
     >
       {children}

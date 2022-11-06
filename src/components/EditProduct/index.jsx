@@ -1,37 +1,68 @@
+import { data } from "autoprefixer";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import API from "../../API";
 import { useDataContext } from "../../contexts/DataContext";
 import Button from "../UI/Button";
 
-const SubcatalogProducts = () => {
+const EditProduct = () => {
   const [data, setdata] = useState([]);
-  const { deleteProduct, addProduct } = useDataContext();
+  const [values, setvalues] = useState({
+    title: "",
+    describe: "",
+    price: 0,
+  });
+  const { editProduct } = useDataContext();
   const [switches, setswitches] = useState([]);
   const params = useParams();
   useEffect(() => {
     if (params.id) {
-      fetch(API.subcatalogs.getProducts + params.id)
-        .then((i) => i.json())
-        .then((i) => setdata(i.data || []));
+      (async function () {
+        await fetch(API.product.getTable + params.id)
+          .then((i) => i.json())
+          .then((i) => {
+            setvalues({
+              title: i.data.productName,
+              desc: i.data.productDescriptions,
+              price: i.data.productPrice,
+            });
+            setdata(i.data || []);
+          });
+      })();
     }
   }, []);
-  const deleteHandler = async (n) => {
-    await deleteProduct(n);
-    fetch(API.subcatalogs.getProducts + params.id)
-      .then((i) => i.json())
-      .then((i) => setdata(i.data || []));
-    // window.location.reload();
-  };
 
-  const addProductHandler = async (e) => {
+  useEffect(() => {
+    data !== [] &&
+      fetch(
+        API.product.getTemplate +
+          "?product-id=" +
+          data.productId +
+          "&template-id=" +
+          data.productTemplateId
+      )
+        .then((i) => i.json())
+        .then((i) => {
+          const newTemplate = i?.data?.body?.switch?.map((i) => ({
+            title: i.switchTitle,
+            options: i.switchBody.map((i) => ({
+              price: i.switchItemPrice,
+              title: i.switchItemTitle,
+            })),
+          }));
+          setswitches(newTemplate || []);
+        });
+  }, [data]);
+
+  const editProductHandler = async (e) => {
     e.preventDefault();
-    const data = {
+    const newdata = {
+      productId: data.productId,
       title: e.target.title.value,
       desc: e.target.desc.value,
       price: e.target.price.value,
-      image: e.target.image.files[0],
+      image: e.target.image.files[0] || undefined,
       subCatalogId: params?.id,
     };
     const newTemplate = {
@@ -57,7 +88,7 @@ const SubcatalogProducts = () => {
       body: JSON.stringify(newTemplate),
     });
     const { data: templateData } = await templateres.json();
-    await addProduct(data, templateData);
+    await editProduct(newdata, templateData);
 
     await fetch(API.subcatalogs.getProducts + params.id)
       .then((i) => i.json())
@@ -151,21 +182,36 @@ const SubcatalogProducts = () => {
   return (
     <div>
       <br />
-      <form onSubmit={addProductHandler} className="">
+      <form onSubmit={editProductHandler} className="">
         <div className="grid  grid-cols-4 gap-4">
           <input type="file" className="p-4" name="image" />
-          <input type="text" className="p-4" placeholder="Title" name="title" />
+          <input
+            type="text"
+            className="p-4"
+            placeholder="Title"
+            value={values.title}
+            name="title"
+            onChange={(e) =>
+              setvalues((p) => ({ ...p, title: e.target.value }))
+            }
+          />
           <input
             type="text"
             className="p-4"
             placeholder="Description"
             name="desc"
+            value={values.desc}
+            onChange={(e) => setvalues((p) => ({ ...p, desc: e.target.value }))}
           />
           <input
             type="number"
             className="p-4"
             placeholder="Price (sum )"
             name="price"
+            value={values.price}
+            onChange={(e) =>
+              setvalues((p) => ({ ...p, price: +e.target.value }))
+            }
           />
         </div>
         <div className="mt-3 text-3xl flex flex-row w-full justify-between items-center">
@@ -235,32 +281,11 @@ const SubcatalogProducts = () => {
         <div></div>
         <div></div>
         <div></div>
-        <Button>Add new product</Button>
+        <Button>Update</Button>
       </form>
       <br />
-      <div className="grid grid-cols-4 mt-4 gap-2">
-        {data.map((i) => (
-          <div className="p-4 shadow bg-white text-center flex flex-col gap-2 justify-start">
-            <img
-              src={i?.productImageName?.String}
-              className="w-full aspect-square object-cover rounded"
-              alt=""
-            />
-            {i.productName}
-            <NavLink className="text-[blue]" to={`/edit/${i.productId}`}>
-              Edit
-            </NavLink>
-            <span
-              className="text-[red]"
-              onClick={() => deleteHandler(i.productId)}
-            >
-              Delete
-            </span>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
 
-export default SubcatalogProducts;
+export default EditProduct;

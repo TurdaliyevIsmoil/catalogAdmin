@@ -7,6 +7,7 @@ import { DataProvider } from "./contexts/DataContext";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
+fetch("https://api.mi-print.uz/api/v1/subcatalog/list");
 root.render(
   <BrowserRouter>
     <DataProvider>

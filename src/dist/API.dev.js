@@ -40,11 +40,13 @@ var _default = {
     "delete": "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/delete?product-id="),
     update: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/update"),
     updateImage: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/upload-image?product-id="),
-    getTable: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/get-product"),
-    getTables: "".concat(HTTP, "://").concat(mainPath, "/tables/get")
+    getTable: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/get-product?product-id="),
+    getTables: "".concat(HTTP, "://").concat(mainPath, "/tables/get"),
+    getTemplate: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/template/get")
   },
   template: {
     create: "".concat(HTTP, "://").concat(mainPath, "/api/v1/template/create"),
+    update: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/template/update"),
     connect: "".concat(HTTP, "://").concat(mainPath, "/api/v1/product/template/create")
   }
 };

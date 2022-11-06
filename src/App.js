@@ -15,6 +15,7 @@ import SingleApplication from "./components/Applcations/SingleApplication";
 import Catalogs from "./components/Catalogs/Catalogs";
 import Subcatalog from "./components/Subcatalog/Index";
 import SubcatalogProducts from "./components/SubCatalogProducts/Index";
+import EditProduct from "./components/EditProduct";
 
 function App() {
   const { loading, auth } = useDataContext();
@@ -43,6 +44,7 @@ function App() {
           <Route path="tables/:id" element={<SingleTable />} />
           <Route path="applications" element={<Applications />} />
           <Route path="applications/:id" element={<SingleApplication />} />
+          <Route path="edit/:id" element={<EditProduct />} />
         </Route>
       </Routes>
     </Container>
